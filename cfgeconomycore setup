@@ -1,0 +1,76 @@
+Welcome to - How To Setup cfgeconomycore.xml and the CustomTypes folder
+
+Quick How To Setup cfgeconomycore.xml and CustomTypes folder
+Step 1 - Create Desktop folder to hold your new types
+Step 2 - Install desired mods 
+Step 3 - Check to see what mods have types files in mod folders above mpmissions folder
+Step 4 - Move types from mod folders above mpmissions into Desktop folder for your new types files
+Step 5 - Edit any names so they are not the same as any other file name in your files (Codelock types)
+Step 6 - Drag and drop the edited types into your CustomTypes folder in your mpmissions folder (create the folder if you neeed)
+Step 7 - Go to your cfgeconomycore.xml and and the new mod names to a new line. 
+		<file name="Replace.xml" type="types" />
+Step 8 - Validate then format and beautify your cfgeconomycore.xml
+Step 9 - Copy and paste the new beautified version over the old cfgeconomycore.xml 
+Step 10 - Restart server
+
+
+
+
+
+Detailed How To Setup cfgeconomycore.xml and CustomTypes folder
+
+First, install what ever mods you want on your server. If the mod has a types file, we will be going over how to add that types file to your cfgeconomycore.xml in your mpmissions folder.
+
+Second open up whatever transfer application you have. I use WinSCP to transfer and to edit all my files but I use GTX Gaming to install any mods.
+
+After you have installed the desired mods, locate the mod in the mod list above where your mpmissions and profiles folder is. Open that mod, look to see if it has a types file in there. Usually they will add a folder called extra, info or types. Look in all the folders that are not the addons and keys if you are unsure or if the creator of that mod has named it differently. Once you have located the types files, drag them into a folder to be edited. I am creating a folder called CustomTypes in my Bitterroot test server folder on my desktop for the types files that i drag over.
+Drag over the types from all the mods you installed over into that folder you just created. Also it's best to do this with one mod at a time as to not get lost or confused. I am going to be adding Expansion, Codelock and BBP (BaseBuildingPlus). I have to change the name of the Codelock types.xml to Codelock_types.xml because there is already a types.xml in your db folder in your mpmissions folder. You can rename these to anything you want as long as it is the only one named that. The Expansion Bundle doesnt have the files you need in the mod folder so i have to go get them from their github which i will provide in the description. Select the download link:
+https://github.com/ExpansionModTeam/DayZ-Expansion-Missions/archive/refs/heads/master.zip
+After it shows up push open then go into the DayZ-Expansion-Missions-master folder then Template then Chernarus. Once you are in where you can see the folder expansion and expansion_ce and cfgeconomycore and cfgeventspawns, copy the expansion and the expansion_ce and the cfgeconomycore to a folder of your choosing. I am going to put them in the Bitterroot Test Server folder with everything else that I am doing right now.
+Now that I have everything, go to your mpmissions folder and create a folder named CustomTypes if you havn't already. In that CustomTypes folder, add the types of the mods you just added. In my case I am only going to be adding BBP.types.xml and the Codelock_types.xml because the Expansion has a slightly different way to be added because of the other xml files that comes with it. Back out from the CustomTypes folder and go to cfgeconomycore.xml which is usually the second one below the bottom folder in your mpmissions folder. In the cfgeconomycore.xml add this section between the </defaults> and the </economycore> at the bottom.
+	<ce folder="CustomTypes">
+		<!-- Single Types -->
+		<file name="Replace.xml" type="types" />
+		<file name="Replace.xml" type="types" />
+		<file name="Replace.xml" type="types" />
+	</ce>
+
+What I normally do is make this the copy line and leave in my cfgeconomycore.xml just like that. When ever I add a new mod i copy that line, go to the end of the line after the /> and press enter and paste the line under then replace the word replace with what ever the name of the types file that I am adding. So in my case I will add the BBP and the Codelock types into two seperate lines like this while leave the top one as the copy line for future types.
+	<ce folder="CustomTypes">
+		<!-- Single Types -->
+		<file name="Replace.xml" type="types" />
+		<file name="BBP_types.xml" type="types" />
+		<file name="Codelock_Types.xml" type="types" />
+	</ce>
+After the single mods are in I still need to add the expansion stuff. Which comes in its own folder.
+Now go back to the folder that you copied the expansion folder, expansion_ce folder and the cfgeconomycore.xml file. Drag and drop the expansion and the expanion_ce into servername/mpmissions/empty.Bitterroot/ 
+Then go back to the folder with all the copies and go into the cfgeconomycore.xml and copy 
+<!-- Copy from here... -->
+	<ce folder="expansion_ce">
+		<file name="expansion_types.xml" type="types" />
+		<file name="expansion_spawnabletypes.xml" type="spawnabletypes" />
+		<file name="expansion_events.xml" type="events" />
+	</ce>
+	<!-- ....To here -->
+Now go into your servers mpmissions and the cfgeconomycore and paste that under the section that you made earlier. Like this.
+	<ce folder="CustomTypes">
+		<!-- Single Types -->
+		<file name="Replace.xml" type="types" />
+		<file name="BBP_types.xml" type="types" />
+		<file name="Codelock_Types.xml" type="types" />
+	</ce>
+	<ce folder="expansion_ce">
+		<file name="expansion_types.xml" type="types" />
+		<file name="expansion_spawnabletypes.xml" type="spawnabletypes" />
+		<file name="expansion_events.xml" type="events" />
+	</ce>
+Once you have done this you should copy cfgeconomycore.xml and validate and beautify it with an xml validator which I will leave the one i use in the discription. If it shows valid, press format and beautify and copy the right side one for the straightened side and paste that in the cfgeconomycore.xml. Now you are all done. If you would like you can make a replace section for another folder in the future like this.
+	<ce folder="ReplaceThisWithFolderName">
+		<file name="ReplaceThisWithNewTypes.xml" type="types" />
+		<file name="ReplaceThisWithNewSpawnableTypes.xml" type="spawnabletypes" />
+		<file name="ReplaceThisWithNewEvents.xml" type="events" />
+	</ce>
+So for future folders with the Types, Spawnabletypes and the Events in it you can add them like this to keep it more organized. Copy that section and add it between the bottom </ce> and the </economycore>. 
+
+
+
